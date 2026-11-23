@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>QASIR CANDY - HEADER BIG</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial;text-align:center;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{height:100%;height:100dvh;overflow:hidden}
+body{background:linear-gradient(180deg,#2B003D,#7B00FF,#FF00A8);color:white;display:flex;flex-direction:column}
+/* ===== HEADER - AB BARA + THORA NEECHE! ===== */
+header{background:#fff;color:#E91E63;margin:12px 10px 0 10px;padding:12px 14px;border-radius:18px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;min-height:62px;box-shadow:0 6px 18px rgba(0,0,0,0.45)}
+header h1{font-size:23px;line-height:1;text-align:left;letter-spacing:0.5px}
+header h1 span{color:#FF9800}
+header small{font-size:11px;color:#888;display:block;margin-top:3px;letter-spacing:0.5px}
+#gearBtn{background:#FFE4F0;border:none;width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,0.2)}
+.topBoxes{display:flex;gap:4px;padding:8px 8px 2px;flex-shrink:0}
+.topBoxes div{background:linear-gradient(180deg,#fff,#FFE4F0);color:#333;flex:1;border-radius:9px;padding:2px 1px;border:1px solid #FFD700;min-width:0}
+.topBoxes div small{font-size:8.5px;color:#888}
+.topBoxes div b{display:block;font-size:14px;line-height:1.1;color:#E91E63;white-space:nowrap;overflow:hidden}
+.progressWrap{background:#1A0026;border:1.5px solid #FFD700;border-radius:20px;margin:2px 8px;padding:2px 6px;display:flex;align-items:center;gap:5px;flex-shrink:0}
+#progressBar{flex:1;background:#111;height:10px;border-radius:10px;overflow:hidden}
+#progressFill{height:100%;width:0%;background:linear-gradient(90deg,#FFD700,#FF9800,#FF00A8);transition:width 0.4s}
+.textRow{display:flex;justify-content:center;align-items:center;gap:6px;padding:2px 8px 2px;flex-shrink:0}
+#msg{font-size:12.5px;font-weight:bold;color:#FFEB3B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.levelLine{font-size:11px;font-weight:bold;color:#fff;white-space:nowrap}
+.boardWrap{flex:1;display:flex;align-items:center;justify-content:center;padding:4px 8px;min-height:0}
+#board{background:linear-gradient(180deg,#FF6B9D,#C2185B);border:3px solid #FFD700;border-radius:16px;padding:5px;display:grid;grid-template-columns:repeat(8,1fr);gap:3px;box-shadow:0 10px 25px rgba(0,0,0,0.5);flex-shrink:0;touch-action:none;cursor:grab;aspect-ratio:1/1}
+.cell{border-radius:9px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;font-size:clamp(16px, 5.5vw, 26px);cursor:grab;transition:transform 0.15s;box-shadow:inset 0 -3px 5px rgba(0,0,0,0.25), inset 0 3px 5px rgba(255,255,255,0.6);touch-action:none}
+.cell.selected{outline:2.5px solid #fff;transform:scale(1.12);box-shadow:0 0 15px #FFD700;z-index:2}
+.cell.dragging{transform:scale(1.15);z-index:5;box-shadow:0 0 18px #FFD700;outline:2.5px solid #fff}
+.cell.falling{animation:fallIn 0.35s ease}
+@keyframes fallIn{from{transform:translateY(-25px);opacity:0}to{transform:translateY(0);opacity:1}}
+.c0{background:linear-gradient(180deg,#FFCDD2,#EF5350);color:#fff}
+.c1{background:linear-gradient(180deg,#FFE0B2,#FF9800);color:#fff}
+.c2{background:linear-gradient(180deg,#C8E6C9,#4CAF50);color:#fff}
+.c3{background:linear-gradient(180deg,#BBDEFB,#2196F3);color:#fff}
+.c4{background:linear-gradient(180deg,#E1BEE7,#9C27B0);color:#fff}
+.c5{background:linear-gradient(180deg,#FFF9C4,#FFEB3B);color:#333}
+.cell.blast{animation:blast 0.45s ease}
+@keyframes blast{0%{transform:scale(1)}30%{transform:scale(1.4) rotate(20deg);box-shadow:0 0 25px #FFD700}100%{transform:scale(0) rotate(90deg)}}
+.bottomBar{flex-shrink:0;padding:6px 10px 48px;display:flex;gap:8px;justify-content:center}
+.btn{background:white;color:#E91E63;border:none;padding:8px 14px;border-radius:20px;font-weight:bold;font-size:13px;cursor:pointer;flex:1;max-width:200px}
+.btn2{background:#2B003D;color:white}
+#settingsPopup{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:200;padding:16px}
+#settingsPopup.show{display:flex}
+.setCard{background:white;color:#333;border-radius:20px;padding:18px;width:92%;max-width:340px;text-align:left}
+.setCard h2{font-size:18px;color:#E91E63;margin-bottom:12px;text-align:center}
+.setRow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #eee}
+.setRow b{font-size:14px}
+.setRow small{color:#888;font-size:11px;display:block}
+.switch{width:50px;height:26px;background:#ddd;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0}
+.switch.on{background:#4CAF50}
+.switch:after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:white;border-radius:50%;transition:0.2s}
+.switch.on:after{left:27px}
+input[type=range]{width:100%;margin-top:6px;accent-color:#E91E63}
+#celebration{position:fixed;inset:0;pointer-events:none;z-index:90;display:none;overflow:hidden}
+#celebration.show{display:block}
+.confetti{position:absolute;top:-20px;width:10px;height:14px;border-radius:3px;animation:fall 1.2s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+#bigText{position:fixed;top:38%;left:50%;transform:translate(-50%,-50%) scale(0);z-index:95;pointer-events:none;font-size:30px;font-weight:900;color:#FFD700;text-shadow:0 4px 0 #E91E63, 0 8px 20px #000;transition:transform 0.3s;white-space:nowrap}
+#bigText.show{transform:translate(-50%,-50%) scale(1.15)}
+#levelPopup{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:100;flex-direction:column;padding:20px}
+#levelPopup.show{display:flex}
+.popupCard{background:white;color:#333;border-radius:25px;padding:20px;width:90%;max-width:340px;animation:popIn 0.4s}
+@keyframes popIn{from{transform:scale(0.7)}to{transform:scale(1)}}
+</style>
+</head>
+<body>
+<header><h1>🍬 CANDY <span>CRUSH</span><small>MADE BY QASIR ABBAS ❤️</small></h1><button id="gearBtn" onclick="openSettings()">⚙️</button></header>
+<div class="topBoxes">
+<div><small>⭐ SCORE</small><b id="score">0</b></div>
+<div><small>🎯 TARGET</small><b id="targetTxt">3500</b></div>
+<div><small>🎮 MOVES</small><b id="moves">35</b></div>
+<div><small>🏆 LEVEL</small><b id="levelTxt">1</b></div>
+</div>
+<div class="progressWrap"><span>⭐</span><div id="progressBar"><div id="progressFill"></div></div><span>🏆</span></div>
+<div class="textRow"><span id="msg">Candy ko Drag karo! 👆</span><span class="levelLine" id="levelLine">| 🔥 Lv 1 - 3500</span></div>
+<div class="boardWrap"><div id="board"></div></div>
+<div class="bottomBar">
+<button class="btn" onclick="startGame(true)">🔄 RESTART</button>
+<button class="btn btn2" onclick="shuffleBoard()">🔀 SHUFFLE</button>
+</div>
+<div id="settingsPopup">
+<div class="setCard">
+<h2>⚙️ SETTINGS</h2>
+<div class="setRow"><div><b>👧 Girl Voice</b><small>Good / Excellent / Amazing bolegi</small></div><div class="switch on" id="voiceSwitch" onclick="toggleVoiceFromSettings()"></div></div>
+<div class="setRow" style="display:block"><b>🔊 Volume</b><small id="volTxt">Volume: 100%</small><input type="range" id="volSlider" min="0" max="100" value="100" oninput="changeVolume(this.value)"></div>
+<div class="setRow"><div><b>🎉 Celebration</b><small>Confetti / Big Text</small></div><div class="switch on" id="celeSwitch" onclick="toggleCele()"></div></div>
+<div class="setRow"><div><b>🔄 Resume Game</b><small>Wahi se shuru jahan ruka tha</small></div><button class="btn" style="flex:none;padding:6px 14px;font-size:12px" onclick="resumeGame()">▶️ RESUME</button></div>
+<div class="setRow"><div><b>🔊 Awaz Test Karo</b><small>Girl abhi bolegi!</small></div><button class="btn" style="flex:none;padding:6px 14px;font-size:12px" onclick="testVoice()">🔊 TEST</button></div>
+<button class="btn" style="width:100%;max-width:none;margin-top:14px;background:#E91E63;color:white" onclick="closeSettings()">✅ DONE</button>
+</div>
+</div>
+<div id="celebration"></div>
+<div id="bigText">🎉 AMAZING! 🎉</div>
+<div id="levelPopup"><div class="popupCard"><div style="font-size:50px">🎉</div><h2 id="popupTitle">LEVEL CLEAR!</h2><p id="popupDesc" style="margin:8px 0;color:#666"></p><div id="popupStars" style="font-size:35px"></div><button class="btn" style="width:100%;max-width:none;margin-top:12px" onclick="nextLevel()">➡️ NEXT LEVEL 🔥</button></div></div>
+<script>
+let candies=['🍫','🍓','🍩','🍬','🍭','🍒'];
+let candyClass=['c0','c1','c2','c3','c4','c5'];
+let board=[], score=0, moves=35, target=3500, level=1, selected=null, voiceOn=true, totalMovesUsed=0, isBlasting=false, volume=1, celeOn=true, audioUnlocked=false;
+let boardEl=document.getElementById('board');
+let normalWords=['Good!','Excellent!','Amazing!','Sweet!','Tasty!','Divine!','Wonderful!','Fantastic!','Beautiful!','Perfect!','Superb!','Brilliant!','Lovely!','Awesome!'];
+let bigWords=['Unbelievable!','Incredible!','Outstanding!','Mind Blowing!','Spectacular!'];
+let wordIndex=0, bigWordIndex=0;
+function fitBoard(){
+  let vw = window.innerWidth;
+  let vh = window.innerHeight;
+  let headerH = document.querySelector('header').offsetHeight;
+  let topH = document.querySelector('.topBoxes').offsetHeight;
+  let progH = document.querySelector('.progressWrap').offsetHeight;
+  let textH = document.querySelector('.textRow').offsetHeight;
+  let bottomH = document.querySelector('.bottomBar').offsetHeight;
+  let used = headerH + topH + progH + textH + bottomH + 28;
+  let availH = vh - used;
+  let availW = vw - 16;
+  let size = Math.min(availW, availH, 430);
+  if(size < 220) size = 220;
+  boardEl.style.width = size + 'px';
+  boardEl.style.height = size + 'px';
+}
+window.addEventListener('resize', fitBoard);
+window.addEventListener('orientationchange', ()=>{ setTimeout(fitBoard, 200); });
+function tryUnlockAudio(){ if(audioUnlocked) return; audioUnlocked=true; try{ window.speechSynthesis.getVoices(); let u=new SpeechSynthesisUtterance(''); u.volume=0; window.speechSynthesis.speak(u); }catch(e){} }
+function speakGirl(text){
+  if(!voiceOn) return;
+  tryUnlockAudio();
+  try{
+    window.speechSynthesis.cancel();
+    setTimeout(()=>{
+      let u=new SpeechSynthesisUtterance(text);
+      u.rate=1.05; u.pitch=1.4; u.volume=volume; u.lang='en-US';
+      let voices=window.speechSynthesis.getVoices();
+      let female=voices.find(v=>v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('samantha') || v.name.toLowerCase().includes('google us english') || v.name.toLowerCase().includes('aria') || v.name.toLowerCase().includes('jenny') || v.name.toLowerCase().includes('natasha'));
+      if(female) u.voice=female;
+      window.speechSynthesis.speak(u);
+      setTimeout(()=>{ if(window.speechSynthesis.paused) window.speechSynthesis.resume(); },200);
+    },50);
+  }catch(e){}
+}
+function testVoice(){ speakGirl('Hello! I am your Candy Girl! Good Luck!'); }
+function openSettings(){ document.getElementById('settingsPopup').classList.add('show'); }
+function closeSettings(){ document.getElementById('settingsPopup').classList.remove('show'); }
+function toggleVoiceFromSettings(){ voiceOn=!voiceOn; document.getElementById('voiceSwitch').className='switch'+(voiceOn?' on':''); if(voiceOn) speakGirl('Girl Voice On!'); }
+function toggleCele(){ celeOn=!celeOn; document.getElementById('celeSwitch').className='switch'+(celeOn?' on':''); }
+function changeVolume(v){ volume=v/100; document.getElementById('volTxt').innerText='Volume: '+v+'%'; }
+function resumeGame(){ closeSettings(); document.getElementById('msg').innerText='▶️ Resume! Level '+level; speakGirl('Welcome Back! Lets Continue!'); }
+function getLevelInfo(lv){
+  let t=3500 + (lv-1)*1200 + Math.floor((lv-1)*(lv-1)*350);
+  let m=35 + (lv-1)*5;
+  let diff=lv<=1?'EASY 😊':lv<=3?'MEDIUM 🙂':lv<=5?'HARD 😤':lv<=7?'VERY HARD 😡':'EXTREME 🔥🔥';
+  return {target:t, moves:m, diff};
+}
+function getSafeCandy(idx, tempBoard){
+  for(let tryCount=0; tryCount<20; tryCount++){
+    let c=Math.floor(Math.random()*candies.length);
+    let row=Math.floor(idx/8), col=idx%8;
+    let left1 = col>=1 ? tempBoard[idx-1] : -2;
+    let left2 = col>=2 ? tempBoard[idx-2] : -2;
+    let up1 = row>=1 ? tempBoard[idx-8] : -2;
+    let up2 = row>=2 ? tempBoard[idx-16] : -2;
+    if(c===left1 && c===left2) continue;
+    if(c===up1 && c===up2) continue;
+    return c;
+  }
+  return Math.floor(Math.random()*candies.length);
+}
+function createBoardNoAutoMatch(){ let b=[]; for(let i=0;i<64;i++){ b.push(getSafeCandy(i, b)); } return b; }
+function startGame(resetLevel=false){
+  if(resetLevel) level=1;
+  let info=getLevelInfo(level);
+  target=info.target; moves=info.moves; score=0; selected=null; totalMovesUsed=0; wordIndex=0; isBlasting=false;
+  document.getElementById('score').innerText=0;
+  document.getElementById('moves').innerText=moves;
+  document.getElementById('targetTxt').innerText=target;
+  document.getElementById('levelTxt').innerText=level;
+  document.getElementById('levelLine').innerText='| 🔥 Lv '+level+' - '+target+' | '+info.diff;
+  document.getElementById('msg').innerText='Candy ko Drag karo! 👆';
+  board=createBoardNoAutoMatch();
+  render();
+  fitBoard();
+}
+function nextLevel(){ document.getElementById('levelPopup').classList.remove('show'); level++; startGame(false); speakGirl('Level '+level+'! Good Luck!'); showCelebration('LEVEL '+level+'! 🔥'); }
+function shuffleBoard(){ board=createBoardNoAutoMatch(); render(); document.getElementById('msg').innerText='Shuffle ho gaya! 🔀'; }
+function render(fallingIdx=[]){
+  boardEl.innerHTML='';
+  board.forEach((c,i)=>{
+    let d=document.createElement('div');
+    d.className='cell '+candyClass[c]+(selected===i?' selected':'')+(fallingIdx.includes(i)?' falling':'');
+    d.innerText=candies[c];
+    d.dataset.idx=i;
+    d.addEventListener('pointerdown', (e)=>onDragStart(e,i));
+    d.addEventListener('pointerenter', (e)=>{ if(isDragging) onDragEnter(i); });
+    d.addEventListener('click', ()=>tapCell(i));
+    boardEl.appendChild(d);
+  });
+  document.getElementById('progressFill').style.width=Math.min(100,(score/target)*100)+'%';
+}
+let isDragging=false, dragStartIdx=null, dragStartX=0, dragStartY=0, dragDone=false;
+function onDragStart(e,i){
+  if(isBlasting) return;
+  tryUnlockAudio();
+  isDragging=true; dragStartIdx=i; dragDone=false;
+  dragStartX=e.clientX; dragStartY=e.clientY;
+  selected=i;
+  boardEl.classList.add('dragging');
+  let cells=document.querySelectorAll('.cell');
+  if(cells[i]) cells[i].classList.add('dragging');
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', onDragEnd, {once:true});
+}
+function onDragMove(e){
+  if(!isDragging || dragDone) return;
+  let dx=e.clientX-dragStartX, dy=e.clientY-dragStartY;
+  if(Math.abs(dx)<25 && Math.abs(dy)<25) return;
+  let targetIdx=-1;
+  if(Math.abs(dx)>Math.abs(dy)){ targetIdx=dragStartIdx + (dx>0?1:-1); if(Math.floor(targetIdx/8)!==Math.floor(dragStartIdx/8)) targetIdx=-1; }
+  else { targetIdx=dragStartIdx + (dy>0?8:-8); }
+  if(targetIdx>=0 && targetIdx<64){ dragDone=true; trySwap(dragStartIdx, targetIdx); }
+}
+function onDragEnd(){ isDragging=false; dragDone=false; boardEl.classList.remove('dragging'); document.removeEventListener('pointermove', onDragMove); setTimeout(()=>{ let cells=document.querySelectorAll('.cell'); cells.forEach(c=>c.classList.remove('dragging')); },100); }
+function onDragEnter(i){
+  if(!isDragging || dragDone) return;
+  let diff=Math.abs(dragStartIdx-i);
+  if(diff===1 || diff===8){ if(diff===1 && Math.floor(dragStartIdx/8)!==Math.floor(i/8)) return; dragDone=true; trySwap(dragStartIdx, i); }
+}
+function trySwap(a,b){
+  if(moves<=0 || isBlasting) return;
+  let tmp=board[a]; board[a]=board[b]; board[b]=tmp;
+  selected=null; moves--; totalMovesUsed++;
+  document.getElementById('moves').innerText=moves;
+  let matched=findMatches();
+  if(matched.size===0){ let tmp2=board[a]; board[a]=board[b]; board[b]=tmp2; moves++; totalMovesUsed--; document.getElementById('moves').innerText=moves; document.getElementById('msg').innerText='❌ Match nahi bana!'; render(); return; }
+  doBlast(matched, true);
+}
+function findMatches(){
+  let matched=new Set();
+  for(let r=0;r<8;r++) for(let c=0;c<6;c++){ let idx=r*8+c; if(board[idx]===board[idx+1] && board[idx]===board[idx+2]){ matched.add(idx); matched.add(idx+1); matched.add(idx+2); } }
+  for(let c=0;c<8;c++) for(let r=0;r<6;r++){ let idx=r*8+c; if(board[idx]===board[idx+8] && board[idx]===board[idx+16]){ matched.add(idx); matched.add(idx+8); matched.add(idx+16); } }
+  return matched;
+}
+function applyGravityAndRefillSafe(){
+  let newFalling=[];
+  for(let c=0;c<8;c++){
+    let colVals=[];
+    for(let r=7;r>=0;r--){ let idx=r*8+c; if(board[idx]!==-1) colVals.push(board[idx]); }
+    for(let r=7, k=0;r>=0;r--,k++){ let idx=r*8+c; if(k<colVals.length){ board[idx]=colVals[k]; } else { board[idx]=getSafeCandy(idx, board); newFalling.push(idx); } }
+  }
+  return newFalling;
+}
+document.addEventListener('keydown', (e)=>{
+  if(isBlasting) return;
+  if(selected===null) selected=0;
+  let row=Math.floor(selected/8), col=selected%8;
+  if(e.key==='ArrowRight' && col<7) trySwap(selected, selected+1);
+  else if(e.key==='ArrowLeft' && col>0) trySwap(selected, selected-1);
+  else if(e.key==='ArrowDown' && row<7) trySwap(selected, selected+8);
+  else if(e.key==='ArrowUp' && row>0) trySwap(selected, selected-8);
+  else return;
+  e.preventDefault(); render();
+});
+function tapCell(i){
+  if(isDragging && dragDone) return;
+  if(moves<=0 || isBlasting) return;
+  tryUnlockAudio();
+  if(selected===null){ selected=i; render(); return; }
+  let diff=Math.abs(selected-i);
+  if(diff===1 || diff===8){ if(diff===1 && Math.floor(selected/8)!==Math.floor(i/8)){ selected=i; render(); return; } trySwap(selected, i); }
+  else { selected=i; render(); }
+}
+function showCelebration(text){
+  if(!celeOn) return;
+  let cel=document.getElementById('celebration');
+  cel.innerHTML=''; cel.classList.add('show');
+  let colors=['#FFD700','#FF00A8','#00FF88','#00BFFF','#FF9800','#FF5252','#fff'];
+  for(let i=0;i<50;i++){ let s=document.createElement('div'); s.className='confetti'; s.style.left=Math.random()*100+'%'; s.style.background=colors[Math.floor(Math.random()*colors.length)]; s.style.animationDelay=(Math.random()*0.4)+'s'; cel.appendChild(s); }
+  let big=document.getElementById('bigText');
+  big.innerText='🎉 '+text+' 🎉';
+  big.classList.add('show');
+  setTimeout(()=>{ big.classList.remove('show'); cel.classList.remove('show'); },1300);
+}
+function doBlast(matched, isUserBlast){
+  isBlasting=true;
+  let cells=document.querySelectorAll('.cell');
+  matched.forEach(idx=>{ if(cells[idx]) cells[idx].classList.add('blast'); });
+  let points=matched.size*100;
+  let word='';
+  if(matched.size>=9){ word=bigWords[bigWordIndex % bigWords.length]; bigWordIndex++; points+=800; }
+  else if(matched.size>=6){ word='Excellent!'; points+=500; }
+  else if(matched.size>=5){ word='Amazing!'; points+=300; }
+  else if(matched.size>=4){ word='Sweet!'; points+=100; }
+  else { word=normalWords[wordIndex % normalWords.length]; wordIndex++; }
+  score+=points;
+  document.getElementById('score').innerText=score;
+  if(isUserBlast){ document.getElementById('msg').innerText='🔥 '+word+' +'+points+'!'; showCelebration(word.toUpperCase()+'!'); speakGirl(word); }
+  setTimeout(()=>{
+    matched.forEach(idx=>{ board[idx]=-1; });
+    let falling=applyGravityAndRefillSafe();
+    render(falling);
+    setTimeout(()=>{
+      let nextMatched=findMatches();
+      if(nextMatched.size>0){ doBlast(nextMatched, false); }
+      else { isBlasting=false; if(score>=target) showLevelClear(); else if(moves<=0 && score<target){ document.getElementById('msg').innerText='😢 Moves Khatam! Restart karo!'; speakGirl('Oh No! Try Again!'); } }
+    },450);
+  },400);
+}
+function showLevelClear(){
+  let stars=totalMovesUsed<=Math.floor(moves*0.4)?'⭐⭐⭐':totalMovesUsed<=Math.floor(moves*0.7)?'⭐⭐':'⭐';
+  document.getElementById('popupTitle').innerText='LEVEL '+level+' CLEAR! 🎉';
+  document.getElementById('popupDesc').innerText='Score: '+score+' / Target: '+target+' | Level '+(level+1)+' Target: '+getLevelInfo(level+1).target+' | Moves: '+getLevelInfo(level+1).moves;
+  document.getElementById('popupStars').innerText=stars;
+  document.getElementById('levelPopup').classList.add('show');
+  showCelebration('LEVEL CLEAR!');
+  speakGirl('Level Complete! Excellent!');
+}
+document.addEventListener('pointerdown', tryUnlockAudio, {once:false});
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged=()=>{ window.speechSynthesis.getVoices(); }; }
+startGame(true);
+setTimeout(fitBoard, 100);
+</script>
+</body>
+</html>
